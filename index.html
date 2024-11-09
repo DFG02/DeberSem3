@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Calcular</h1>
+        <p>Numero 1:</p>
+        <input type="text" id="numero1">
+        <br>
+        <p>Numero 2:</p>
+        <input type="text" id="numero2">
+        <br>
+        <p>Operación:</p>
+        <input type="text" id="operacion" placeholder="+,-,/,*">
+        <p>El Resultado es: <span id="resultado"></span></p>
+        <button onclick="calcular()">Calcular</button>
+    </div>
+
+    <script>
+        function calcular() {
+            // Obtener los valores de los inputs
+            const num1 = parseFloat(document.getElementById('numero1').value);
+            const num2 = parseFloat(document.getElementById('numero2').value);
+            const operacion = document.getElementById('operacion').value;
+            let resultado;
+
+            // Verificar que los números sean válidos
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('resultado').textContent = 'Por favor ingrese números válidos';
+                return;
+            }
+
+            // Realizar la operación según el operador ingresado
+            switch(operacion) {
+                case '+':
+                    resultado = num1 + num2;
+                    break;
+                case '-':
+                    resultado = num1 - num2;
+                    break;
+                case '*':
+                    resultado = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 === 0) {
+                        document.getElementById('resultado').textContent = 'No se puede dividir por cero';
+                        return;
+                    }
+                    resultado = num1 / num2;
+                    break;
+                default:
+                    document.getElementById('resultado').textContent = 'Operación no válida. Use +, -, *, /';
+                    return;
+            }
+
+            // Mostrar el resultado
+            document.getElementById('resultado').textContent = resultado;
+        }
+    </script>
+</body>
+</html>
